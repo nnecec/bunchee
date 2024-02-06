@@ -28,6 +28,7 @@ import { rawContent } from './plugins/raw-plugin'
 import { aliasEntries } from './plugins/alias-plugin'
 import { prependDirectives } from './plugins/prepend-directives'
 import { prependShebang } from './plugins/prepend-shebang'
+import { postcss } from './plugins/postcss-plugin'
 import {
   getExportsDistFilesOfCondition,
   getExportFileTypePath,
@@ -268,6 +269,7 @@ async function buildInputConfig(
           ...commonPlugins,
           preserveDirectives(),
           aliasPlugin,
+          postcss({ exclude: /node_modules/, cwd }),
           inlineCss({ exclude: /node_modules/ }),
           rawContent({ exclude: /node_modules/ }),
           isBinEntry && prependShebang(entry),
